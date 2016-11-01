@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.account.cardInfo">
+	<select id="queryCardInfo" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from card_info a left join card_product b on a.PRODUCT_CODE=b.PRODUCT_CODE where CARDNO = #{CARDNO,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryCardOrder" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from biz_order_dtl  where CARDNO = #{CARDNO,jdbcType=VARCHAR}
+	</select>
+</mapper>

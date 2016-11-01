@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.mapper.msg.MsgReqBackupMapper">
+	<insert id="insertMsgResp" parameterType="java.util.HashMap">
+		INSERT INTO msg_resp_backup
+		(
+			TXNCODE,
+			VERSION,
+			MERCHANTID,
+			MERCHANTSEQ,
+			TXNDATE,
+			TXNTIME,
+			PACKETSIGNATURE,
+			PACKETCONTENT,
+			PLATFORMSEQ,
+			ERRCODE,
+			ERRMSG
+		)
+		VALUES
+		(
+			#{TXNCODE},
+			#{VERSION},
+			#{MERCHANTID},
+			#{MERCHANTSEQ},
+			#{TXNDATE},
+			#{TXNTIME},
+			#{PACKETSIGNATURE},
+			#{PACKETCONTENT},
+			#{PLATFORMSEQ},
+			#{ERRCODE},
+			#{ERRMSG}
+		)
+	</insert>
+</mapper>

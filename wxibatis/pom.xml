@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>wxibatis</artifactId>
+  <packaging>jar</packaging>
+
+  <name>wxibatis</name>
+  <url>http://maven.apache.org</url>
+ 
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <ibatis.version>3.2.2</ibatis.version>
+  </properties>
+
+  <dependencies>
+    <!-- ibatis依赖包 -->
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+		<version>1.2.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+		<version>${ibatis.version}</version>
+	</dependency>
+	<!-- mysql -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.25</version>
+	</dependency>
+	<!-- oracle -->
+	
+  <!-- sqlserver-->
+	  <dependency>
+		<groupId>com.hynnet</groupId>
+		<artifactId>sqljdbc4-chs</artifactId>
+		<version>4.0.2206.100</version>
+	</dependency>
+  </dependencies>
+  <parent>
+  	<groupId>com.cf.wx</groupId>
+  	<artifactId>parent</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <organization>
+  	<name>上海酷服信息科技有限公司</name>
+  	<url>http://www.cool-srv.com</url>
+  </organization>
+  <description>数据库操作封装</description>
+  <build>
+  	<plugins>
+  		<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>2.4</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                    </manifest>
+                </archive>
+            </configuration>
+  		</plugin>
+  	</plugins>
+  	<resources>
+  		<resource>  
+            <directory>src/main/resources</directory>  
+            <includes>  
+                <include>**/*.properties</include>  
+                <include>**/*.xml</include>  
+                <include>**/*.tld</include>  
+            </includes>  
+            <filtering>false</filtering>  
+        </resource>  
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+  </build>
+  <groupId>com.cf.wx</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+</project>

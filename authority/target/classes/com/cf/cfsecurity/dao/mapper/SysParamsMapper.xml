@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cf.dao.mapper.SysParamsMapper" >
+  <!-- 读取系统参数内存-->
+	<select id="selectSysParams" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT *
+		  FROM TB_SYSPARAM 
+		  <where> 
+			1=1 
+		</where> 
+	</select>
+	
+	<select id="getSysParamsValue" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT PARAM_VAL
+		  FROM TB_SYSPARAM 
+		  <where> 
+			1=1 and PARAMGROUP_ID=#{PARAMGROUP_ID} and PARAM_ID=#{PARAM_ID}
+		</where> 
+	</select>
+	<update id="setSysParamsValue" parameterType="java.util.HashMap">
+		UPDATE TB_SYSPARAM 
+		SET 
+			PARAM_VAL=#{PARAM_VAL,jdbcType=VARCHAR}
+		<where> 
+			1=1 
+			and PARAMGROUP_ID=#{PARAMGROUP_ID,jdbcType=VARCHAR}
+			<if test="PARAM_ID!=null &amp;&amp; !&quot;&quot;.equals(PARAM_ID)">
+			and PARAM_ID=#{PARAM_ID,jdbcType=VARCHAR}
+			</if>
+		</where> 
+	</update>	
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.account.accInfo">
+	<select id="queryAccByCardNo" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select a.*,c.CARDNO from ACC_INFO a 
+		INNER JOIN CARD_ACC_MAP c
+		ON c.ACCNO=a.ACCNO
+		where c.CARDNO=#{CARDNO,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryTransSeq" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from biz_trans_detl where TRANS_SEQ = #{OMERCHANTSEQ,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryAccByNo" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from ACC_INFO where ACCNO=#{ACCNO,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.sys.tbDictTemp" >
+	<select id="queryDictTemp" parameterType="java.lang.String" resultType="java.util.HashMap">
+		${pageBegin}
+		SELECT GROUP_ID,GROUP_NAME,DICT_VALUE,DICT_NAME,OP_FLAG,MODIFY_TIME,MODIFY_USER
+		  FROM tb_dict_temp  
+		  <where> 
+			1=1 
+			<if test="GROUP_ID!=null &amp;&amp; !&quot;&quot;.equals(GROUP_ID)">
+				and GROUP_ID=#{GROUP_ID,jdbcType=VARCHAR} 
+			</if>
+			<if test="GROUP_NAME!=null &amp;&amp; !&quot;&quot;.equals(GROUP_NAME)">
+				and GROUP_NAME  like CONCAT('%',CONCAT(REPLACE(#{GROUP_NAME},'%','\%'),'%'))
+			</if>
+			<if test="DICT_VALUE!=null &amp;&amp; !&quot;&quot;.equals(DICT_VALUE)">
+				and DICT_VALUE  like CONCAT('%',CONCAT(REPLACE(#{DICT_VALUE},'%','\%'),'%'))
+			</if>
+			<if test="DICT_NAME!=null &amp;&amp; !&quot;&quot;.equals(DICT_NAME)">
+				and DICT_NAME  like CONCAT('%',CONCAT(REPLACE(#{DICT_NAME},'%','\%'),'%'))
+			</if>
+			<if test="CHECKER!=null &amp;&amp; !&quot;&quot;.equals(CHECKER)">
+			and MODIFY_USER!=#{CHECKER,jdbcType=VARCHAR} 
+		</if>
+		</where> 
+		order by GROUP_ID
+		${pageEnd} 
+	</select>
+	
+	<select id="queryDictTemp_totalCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT count(*)
+		  FROM tb_dict_temp   
+		  <where> 
+			1=1 
+			<if test="GROUP_ID!=null &amp;&amp; !&quot;&quot;.equals(GROUP_ID)">
+				and GROUP_ID=#{GROUP_ID,jdbcType=VARCHAR} 
+			</if>
+			<if test="GROUP_NAME!=null &amp;&amp; !&quot;&quot;.equals(GROUP_NAME)">
+				and GROUP_NAME  like CONCAT('%',CONCAT(REPLACE(#{GROUP_NAME},'%','\%'),'%'))
+			</if>
+			<if test="DICT_VALUE!=null &amp;&amp; !&quot;&quot;.equals(DICT_VALUE)">
+				and DICT_VALUE  like CONCAT('%',CONCAT(REPLACE(#{DICT_VALUE},'%','\%'),'%'))
+			</if>
+			<if test="DICT_NAME!=null &amp;&amp; !&quot;&quot;.equals(DICT_NAME)">
+				and DICT_NAME  like CONCAT('%',CONCAT(REPLACE(#{DICT_NAME},'%','\%'),'%'))
+			</if>
+			<if test="CHECKER!=null &amp;&amp; !&quot;&quot;.equals(CHECKER)">
+			and MODIFY_USER!=#{CHECKER,jdbcType=VARCHAR} 
+		</if>
+		</where> 
+	</select>
+	<select id="queryDicttempByID" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		${pageBegin}
+		SELECT count(*)
+		FROM tb_dict_temp
+		WHERE
+		GROUP_ID = #{GROUP_ID} and 
+		DICT_VALUE = #{DICT_VALUE}
+		${pageEnd}
+	</select>
+	<select id="queryDicttempID" parameterType="java.util.HashMap"
+		resultType="com.cf.cfsecurity.domain.TbDict">
+		${pageBegin}
+		SELECT GROUP_ID,GROUP_NAME,DICT_VALUE,DICT_NAME,MODIFY_TIME,MODIFY_USER
+		FROM tb_dict_temp
+		WHERE
+		GROUP_ID = #{GROUP_ID} and 
+		DICT_VALUE = #{DICT_VALUE}
+		${pageEnd}
+	</select>
+	<insert id="addDictTemp" parameterType="java.util.HashMap" >
+		INSERT into tb_dict_temp (GROUP_ID,GROUP_NAME,DICT_VALUE,DICT_NAME,OP_FLAG,MODIFY_TIME,MODIFY_USER) 
+		VALUES (#{GROUP_ID,jdbcType=VARCHAR}, 
+				#{GROUP_NAME,jdbcType=VARCHAR},
+		 		#{DICT_VALUE,jdbcType=VARCHAR}, 
+		 		#{DICT_NAME,jdbcType=VARCHAR},
+		 		#{OP_FLAG,jdbcType=VARCHAR},
+		 		#{MODIFY_TIME,jdbcType=VARCHAR}, 
+		 		#{MODIFY_USER,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateDictTemp" parameterType="java.lang.String" >
+		update tb_dict_temp set GROUP_NAME= #{GROUP_NAME,jdbcType=VARCHAR},
+			DICT_NAME = #{DICT_NAME,jdbcType=VARCHAR} 
+		  <where> 
+			1=1 and GROUP_ID=#{GROUP_ID,jdbcType=VARCHAR} 
+			and DICT_VALUE=#{DICT_VALUE,jdbcType=VARCHAR} 
+		</where> 
+	</update>
+		
+	<delete id="delDictTemp" parameterType="java.lang.String" >
+		DELETE FROM tb_dict_temp  
+		  <where> 
+			1=1 and GROUP_ID=#{GROUP_ID,jdbcType=VARCHAR} 
+			and DICT_VALUE=#{DICT_VALUE,jdbcType=VARCHAR} 
+		</where> 
+	</delete>
+	
+</mapper>

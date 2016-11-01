@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.mapper.msg.MsgReqBackupMapper">
+	<insert id="insertMsgReq" parameterType="java.util.HashMap">
+		INSERT INTO msg_req_backup
+		(
+			TXNCODE,
+			VERSION,
+			MERCHANTID,
+			MERCHANTSEQ,
+			TXNDATE,
+			TXNTIME,
+			PACKETSIGNATURE,
+			PACKETCONTENT
+		)
+		VALUES
+		(
+			#{TXNCODE},
+			#{VERSION},
+			#{MERCHANTID},
+			#{MERCHANTSEQ},
+			#{TXNDATE},
+			#{TXNTIME},
+			#{PACKETSIGNATURE},
+			#{PACKETCONTENT}
+		)
+	</insert>
+	
+	<select id="selectMsgReqCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from msg_req_backup
+		WHERE 1=1
+			AND TXNCODE=#{TXNCODE}
+			AND	MERCHANTID=#{MERCHANTID}
+			AND MERCHANTSEQ=#{MERCHANTSEQ}
+			AND TXNDATE=#{TXNDATE}
+	</select>
+</mapper>

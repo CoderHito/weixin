@@ -1,0 +1,392 @@
+body{font-size:1em;font-family:'microsoft yahei',Verdana,Arial,Helvetica,sans-serif;-webkit-text-size-adjust:none; padding:0; margin:0;}
+
+div {margin: 0; padding: 0}
+
+a{text-decoration : none;}
+a:hover{text-decoration:none;}
+
+.img-thumbnail {
+    padding: 2px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid #FFFFFF;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.list-thumbnails {
+    float: left;
+    max-width: 74px;
+    max-height: 50px;
+    line-height: 50px;
+}
+
+.img-thumbnail {
+    margin-top: 5px;
+}
+
+.list-content {
+    color: #333333;
+    padding: 10px 10px 10px 15px;
+}
+
+.list-title {
+    font-size: 1em;
+}
+
+.list-desc {
+    font-size: 0.9em;
+    color: #666666;
+}
+
+.list-img {
+    margin: 10px 10px 0 0;
+}
+
+.load_more {
+    height: 46px;
+    background-color: #EEEEEE;
+    color: #333333;
+    text-align: center;
+    font-size: 15px;
+    line-height: 46px;
+}
+
+.load_more>span {
+    color: #333333;
+}
+
+.top-space {
+    margin-top: 20px;
+}
+
+.clear-fix {
+    clear: both;
+}
+
+.indented {
+    margin: 0.5em 1em;
+}
+
+.button {
+    line-height: 2.5em;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    -webkit-box-shadow: inset 0 -1px rgba(0,0,0,0.1), 0 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 -1px rgba(0,0,0,0.1), 0 1px rgba(0,0,0,0.075);
+    width: 100%;
+    background-color: #CCCCCC;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    font-size: inherit;
+    border-radius: 4px;
+}
+
+.button.accept {
+    background-color: #2ecc71;
+    color: #FFFFFF;
+}
+
+.button.warn {
+    background-color: #FF6600;
+    color: #FFFFFF;
+}
+
+.button.error {
+    background-color: #E43B3E;
+    color: #FFFFFF;
+}
+
+.button.normal {
+    background-color: #0095c1;
+    color: #FFFFFF;
+}
+
+.button.link {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #0095c1;
+}
+
+.clearfix:after{
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden
+}
+
+.notify-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.alert {
+    padding: 8px 10px;
+    margin: auto;
+    border: 1px solid #eed3d7;
+    border-radius: 4px;
+    position: relative;
+    top: 0;
+    font-size: 70%;
+}
+
+.alert-red {
+    color: white;
+    background-color: #DA4453;
+}
+.alert-green {
+    color: white;
+    background-color: #37BC9B;
+}
+.alert-blue {
+    color: white;
+    background-color: #4A89DC;
+}
+.alert-yellow {
+    color: white;
+    background-color: #F6BB42;
+}
+.alert-orange {
+    color:white;
+    background-color: #E9573F;
+}
+
+.alert-grey {
+    color:#454545;
+    background-color: #E5E5E5;
+}
+/********************消息tip************************/
+.msg-tooltipWrap{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 19891014;
+}
+.msg-tooltipInner{
+    pointer-events: none;
+    display: table;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+.msg-tooltip{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.msg-tooltip .zvalid-resultformat{
+    display: inline-block;
+    position: relative;
+    background-color:rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0,0,0,.1);
+    pointer-events: auto;
+    animation-name:fieldTipBounceIn;
+    -webkit-animation-name:fieldTipBounceIn;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-duration: .18s;
+    animation-duration: .18s;
+}
+@-webkit-keyframes msgTipBounceIn{
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+/******************** loading ******************/
+.app-loading-div{
+	position:absolute;left:0;top:0;filter:alpha(opacity=50);opacity:0.5;background:#fff;width: 100%; height: 100%;
+}
+.app-loading-i{
+	position:absolute;left:50%;top:50%;
+}
+/******************** 交易明细查询页面 ******************/
+.indented-container {
+    padding: 35px 20px;
+}
+.form fieldset {
+    border: 0;
+}
+.form > fieldset > input {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 100%;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    margin-bottom: 5px;
+    margin-left: -12px;
+}
+.form .selector-control {
+    display: block;
+    width: 100%;
+    height: 46px;
+    padding: 6px 12px;
+    font-size: 110%;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    margin-bottom: 5px;
+    margin-left: -12px;
+}
+.form label {
+    line-height: 25px;
+    color: #999999;
+    font-size: 95%;
+    margin-bottom: 10px;
+}
+.margin-50-5{
+	margin: 50px 5px;
+}
+.detail-header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 45px;
+	line-height: 45px;
+	background: #E43B3E;
+	padding: 0;
+	color: #eee;
+	font-size: 20px;
+	font-weight: bold;
+}
+.detail-header i{
+	display: inline-block;float: left;line-height: 45px;text-align: center;width: 20%;
+}
+.detail-wrapper{
+	position: absolute;
+	top: 45px;
+	bottom: 1px;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+}
+.detail-scroll{
+	color: #555;
+	position: absolute;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	width: 100%;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}
+.detail-scroll ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	text-align: left;
+	position: relative;
+}
+
+.detail-scroll li {
+	width: 100%;
+	top: 0;
+	left: 0;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	height: 50px;
+	border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
+	background-color: #fafafa;
+}
+.detail-list{
+    margin: auto;
+    top: 0;
+    font-size: 70%;
+    font-family: "楷体";
+    background-color: #fff;
+}
+.detail-list .label{
+	width: 20%;
+	display: inline-block;
+	text-align: right;
+}
+/******************卡信息*******************/
+.no-border {
+    border: 0;
+}
+.cardinfo-input {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 100%;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #fff;
+    margin-bottom: 5px;
+    margin-left: -12px;
+}
+

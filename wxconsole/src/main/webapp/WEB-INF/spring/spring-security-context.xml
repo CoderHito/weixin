@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	<debug />
+	<!-- -->
+	<!-- <http pattern="/js/**" security="none" /> <http pattern="/resource/**" 
+		security="none" /> <http pattern="/css/**" security="none" /> -->
+	<http pattern="/login.jsp" security="none" />
+	<http pattern="/ext4full/bootstrap.js" security="none" />
+	<http pattern="/js/3des.js" security="none" />
+	<http pattern="/ext4full/ext-lang-zh_CN.js" security="none" />
+	<http pattern="/ext4full/ext-all.js" security="none" />
+	<http pattern="/js/login.js" security="none" />
+	<http pattern="/tologin" security="none" />
+	<http pattern="/css/ext-theme-classic/ext-theme-classic-all-rtl.css"
+		security="none" />
+	<http pattern="/css/ext-theme-classic/base.css" security="none" />
+	<http pattern="/css/cframe_icon.css" security="none" />
+	<http pattern="/css/cframe.css" security="none" />
+	<http pattern="/inclusiveImportFileUploadAction!doUpload"
+		security="none" />
+	<http pattern="/image/cframe/background.jpg" security="none" />
+	<http pattern="/css/ext-theme-classic/images/form/exclamation.gif"
+		security="none" />
+	<!-- <http pattern="/jsp/common/**" security="none" /> <http pattern="/ext4full/**" 
+		security="none" /> <http pattern="/ireport/**" security="none" /> <http pattern="/image/**" 
+		security="none" /> <http pattern="/importFileUploadActionsave!doUpload" security="none" 
+		/> -->
+	<http use-expressions="true" entry-point-ref="authenticationProcessingFilterEntryPoint">
+
+		<intercept-url pattern="/**" access="isAuthenticated()" />
+
+
+		<logout invalidate-session="true" success-handler-ref="myLogoutSuccessHandler"
+			logout-url="/j_spring_security_logout" />
+		<!-- logout-success-url="/tologin" -->
+		<!-- 实现免登陆验证 -->
+		<remember-me />
+
+		<session-management invalid-session-url="/jsp/common/timeout.jsp"
+			session-fixation-protection="none">
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" />
+		</session-management>
+		<custom-filter ref="myLoginFilter" position="FORM_LOGIN_FILTER" />
+		<custom-filter ref="mySecurityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+		<custom-filter ref="mySessionManagementFilter" before="ANONYMOUS_FILTER" />
+		<custom-filter ref="myAnonymousAuthFilter" before="SESSION_MANAGEMENT_FILTER " />
+		<custom-filter ref="myExceptionTranslationFilter"
+			before="EXCEPTION_TRANSLATION_FILTER" />
+		<custom-filter ref="mySecurityContextPersistenceFilter"
+			before="SECURITY_CONTEXT_FILTER" />
+	</http>
+
+	<!-- 登录验证器 -->
+	<beans:bean id="myLoginFilter"
+		class="com.cf.cfsecurity.service.impl.UsernamePasswordAuthenticationFilterImpl">
+		<!-- 处理登录 -->
+		<beans:property name="usernameParameter" value="username" />
+		<beans:property name="passwordParameter" value="password" />
+		<beans:property name="filterProcessesUrl" value="/login"></beans:property>
+		<beans:property name="sessionAuthenticationStrategy"
+			ref="sessionAuthenticationStrategy" />
+		<beans:property name="authenticationSuccessHandler"
+			ref="myLoginLogAuthenticationSuccessHandler"></beans:property>
+		<beans:property name="authenticationFailureHandler"
+			ref="myLoginLogAuthenticationFailureHandler"></beans:property>
+		<beans:property name="authenticationManager" ref="myAuthenticationManager"></beans:property>
+	</beans:bean>
+	<beans:bean id="myLoginLogAuthenticationSuccessHandler"
+		class="com.cf.cfsecurity.handler.LoginSuccessHandler">
+		<beans:property name="cfUserDao" ref="cfUserDao" />
+	</beans:bean>
+	<beans:bean id="myLoginLogAuthenticationFailureHandler"
+		class="com.cf.cfsecurity.handler.LoginFailureHandler">
+	</beans:bean>
+	<!-- 加密方式 -->
+	<beans:bean id="myPasswordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+	<!-- 配置加密盐值 -->
+	<beans:bean id="mySaltSource"
+		class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+		<beans:property name="userPropertyToUse" value="username" />
+	</beans:bean>
+
+	<!-- 认证过滤器 -->
+	<beans:bean id="mySecurityFilter"
+		class="com.cf.cfsecurity.service.impl.SecurityFilter">
+		<!-- 用户拥有的权限 -->
+		<beans:property name="authenticationManager" ref="myAuthenticationManager" />
+		<!-- 用户是否拥有所请求资源的权限 -->
+		<beans:property name="accessDecisionManager" ref="myAccessDecisionManager" />
+		<!-- 资源与权限对应关系 -->
+		<beans:property name="securityMetadataSource" ref="mySecurityMetadataSource" />
+		<beans:property name="cfUserDao" ref="cfUserDao" />
+	</beans:bean>
+	<!-- 实现了UserDetailsService的Bean -->
+	<authentication-manager alias="myAuthenticationManager">
+		<authentication-provider user-service-ref="myUserDetailServiceImpl">
+			<password-encoder ref="myPasswordEncoder">
+				<salt-source ref="mySaltSource" />
+			</password-encoder>
+		</authentication-provider>
+
+
+	</authentication-manager>
+
+	<beans:bean id="myAccessDecisionManager"
+		class="com.cf.cfsecurity.service.impl.AccessDecisionManagerImpl"></beans:bean>
+	<beans:bean id="mySecurityMetadataSource"
+		class="com.cf.cfsecurity.service.impl.FilterInvocationSecurityMetadataSourceImpl">
+		<beans:property name="cfResourceDao" ref="cfResourceDao"></beans:property>
+	</beans:bean>
+	<!-- <beans:bean id="myUserDetailServiceImpl" class="com.cf.cfsecurity.service.impl.UserDetailsServiceImpl"/> -->
+	<beans:bean id="myUserDetailServiceImpl"
+		class="com.cf.cfsecurity.service.impl.UserDetailsServiceImpl">
+		<beans:property name="cfUserDao" ref="cfUserDao"></beans:property>
+		<beans:property name="cfRoleDao" ref="cfRoleDao"></beans:property>
+		<beans:property name="cfResourceDao" ref="cfResourceDao"></beans:property>
+	</beans:bean>
+
+	<!-- 未登录的切入点 -->
+	<beans:bean id="authenticationProcessingFilterEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/tologin"></beans:property>
+	</beans:bean>
+
+	<!-- SESSION固化保护,以及并发控制 -->
+	<beans:bean id="mySessionManagementFilter"
+		class="org.springframework.security.web.session.SessionManagementFilter">
+		<beans:constructor-arg name="securityContextRepository"
+			ref="securityContextRepository" />
+		<beans:property name="sessionAuthenticationStrategy"
+			ref="sessionAuthenticationStrategy" />
+	</beans:bean>
+
+	<!-- 生成HttpSessionSecurityContextRepository -->
+	<beans:bean id="securityContextRepository"
+		class="org.springframework.security.web.context.HttpSessionSecurityContextRepository">
+		<beans:property name="allowSessionCreation" value="true" />
+		<beans:property name="disableUrlRewriting" value="false" />
+	</beans:bean>
+
+	<!-- SESSION管理 -->
+	<beans:bean id="sessionRegistry"
+		class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+	<beans:bean id="sessionAuthenticationStrategy"
+		class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+		<beans:constructor-arg name="sessionRegistry"
+			ref="sessionRegistry" />
+		<beans:property name="maximumSessions" value="1" />
+		<beans:property name="exceptionIfMaximumExceeded"
+			value="true" />
+	</beans:bean>
+
+	<!-- 匿名访问过滤器 -->
+	<beans:bean id="myAnonymousAuthFilter"
+		class="org.springframework.security.web.authentication.AnonymousAuthenticationFilter">
+		<beans:property name="key" value="anonymous" />
+		<beans:property name="userAttribute" value="游客,ROLE_ANONYMOUS" />
+	</beans:bean>
+	<beans:bean id="anonymousAuthenticationProvider"
+		class="org.springframework.security.authentication.AnonymousAuthenticationProvider">
+		<beans:property name="key" value="anonymous" />
+	</beans:bean>
+
+	<!-- 异常处理过滤器 -->
+	<beans:bean id="myExceptionTranslationFilter"
+		class="org.springframework.security.web.access.ExceptionTranslationFilter">
+		<beans:property name="authenticationEntryPoint"
+			ref="authenticationProcessingFilterEntryPoint" />
+		<beans:property name="accessDeniedHandler">
+			<!-- 拒绝未授权访问跳转 -->
+			<beans:bean
+				class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+				<beans:property name="errorPage" value="/jsp/common/403.jsp" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<!-- 持久化SecurityContext过滤器 -->
+	<beans:bean id="mySecurityContextPersistenceFilter"
+		class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+		<beans:property name="securityContextRepository" ref="securityContextRepository" />
+	</beans:bean>
+
+	<!-- 注销过滤器 -->
+	<beans:bean id="logoutFilter"
+		class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<beans:constructor-arg value="/" />
+		<beans:constructor-arg>
+			<beans:array>
+				<beans:ref bean="logoutHandler" />
+			</beans:array>
+		</beans:constructor-arg>
+		<beans:property name="filterProcessesUrl" value="/logout" />
+	</beans:bean>
+
+	<!-- 注销监听器 -->
+	<beans:bean id="myLogoutSuccessHandler"
+		class="com.cf.cfsecurity.handler.LogoutSuccessHandler">
+		<beans:property name="cfUserDao" ref="cfUserDao" />
+	</beans:bean>
+
+	<!-- 注销监听器 -->
+	<beans:bean id="logoutHandler"
+		class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler">
+	</beans:bean>
+</beans:beans>

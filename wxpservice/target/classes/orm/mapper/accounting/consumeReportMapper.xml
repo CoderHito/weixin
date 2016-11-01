@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.account.consumeReport">
+
+	<insert id="insertConsumeReport" parameterType="java.util.HashMap">
+		insert into consume_report
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="CONSUME_AMT!=null &amp;&amp; !&quot;&quot;.equals(CONSUME_AMT)">
+			CONSUME_AMT,
+		</if>
+		<if test="ZYT_CONSUME_SEQ!=null &amp;&amp; !&quot;&quot;.equals(ZYT_CONSUME_SEQ)">
+			ZYT_CONSUME_SEQ,
+		</if>
+		<if test="CARDNO!=null &amp;&amp; !&quot;&quot;.equals(CARDNO)">
+			CARDNO,
+		</if>
+		<if test="BF_CARD_BAL!=null &amp;&amp; !&quot;&quot;.equals(BF_CARD_BAL)">
+			BF_CARD_BAL,
+		</if>
+		<if test="AF_CARD_BAL!=null &amp;&amp; !&quot;&quot;.equals(AF_CARD_BAL)">
+			AF_CARD_BAL,
+		</if>
+		<if test="RECHARGE_AMT!=null &amp;&amp; !&quot;&quot;.equals(RECHARGE_AMT)">
+			RECHARGE_AMT,
+		</if>
+		<if test="BF_ACC_BAL!=null &amp;&amp; !&quot;&quot;.equals(BF_ACC_BAL)">
+			BF_ACC_BAL,
+		</if>
+		<if test="AF_ACC_BAL!=null &amp;&amp; !&quot;&quot;.equals(AF_ACC_BAL)">
+			AF_ACC_BAL,
+		</if>
+		<if test="RECHAGE_SEQ!=null &amp;&amp; !&quot;&quot;.equals(RECHAGE_SEQ)">
+			RECHAGE_SEQ,
+		</if>
+		<if test="TRANS_TYPE!=null &amp;&amp; !&quot;&quot;.equals(TRANS_TYPE)">
+			TRANS_TYPE,
+		</if>
+		<if test="TRANS_DATE!=null &amp;&amp; !&quot;&quot;.equals(TRANS_DATE)">
+			TRANS_DATE,
+		</if>
+		<if test="TRANS_TIME!=null &amp;&amp; !&quot;&quot;.equals(TRANS_TIME)">
+			TRANS_TIME,
+		</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="CONSUME_AMT!=null &amp;&amp; !&quot;&quot;.equals(CONSUME_AMT)">
+			#{CONSUME_AMT,jdbcType=VARCHAR},
+		</if>
+		<if test="ZYT_CONSUME_SEQ!=null &amp;&amp; !&quot;&quot;.equals(ZYT_CONSUME_SEQ)">
+			#{ZYT_CONSUME_SEQ,jdbcType=VARCHAR},
+		</if>
+		<if test="CARDNO!=null &amp;&amp; !&quot;&quot;.equals(CARDNO)">
+			#{CARDNO,jdbcType=VARCHAR},
+		</if>
+		<if test="BF_CARD_BAL!=null &amp;&amp; !&quot;&quot;.equals(BF_CARD_BAL)">
+			#{BF_CARD_BAL,jdbcType=VARCHAR},
+		</if>
+		<if test="AF_CARD_BAL!=null &amp;&amp; !&quot;&quot;.equals(AF_CARD_BAL)">
+			#{AF_CARD_BAL,jdbcType=VARCHAR},
+		</if>
+		<if test="RECHARGE_AMT!=null &amp;&amp; !&quot;&quot;.equals(RECHARGE_AMT)">
+			#{RECHARGE_AMT,jdbcType=VARCHAR},
+		</if>
+		<if test="BF_ACC_BAL!=null &amp;&amp; !&quot;&quot;.equals(BF_ACC_BAL)">
+			#{BF_ACC_BAL,jdbcType=VARCHAR},
+		</if>
+		<if test="AF_ACC_BAL!=null &amp;&amp; !&quot;&quot;.equals(AF_ACC_BAL)">
+			#{AF_ACC_BAL,jdbcType=VARCHAR},
+		</if>
+		<if test="RECHAGE_SEQ!=null &amp;&amp; !&quot;&quot;.equals(RECHAGE_SEQ)">
+			#{RECHAGE_SEQ,jdbcType=VARCHAR},
+		</if>
+		<if test="TRANS_TYPE!=null &amp;&amp; !&quot;&quot;.equals(TRANS_TYPE)">
+			#{TRANS_TYPE,jdbcType=VARCHAR},
+		</if>
+		<if test="TRANS_DATE!=null &amp;&amp; !&quot;&quot;.equals(TRANS_DATE)">
+			#{TRANS_DATE,jdbcType=VARCHAR},
+		</if>
+		<if test="TRANS_TIME!=null &amp;&amp; !&quot;&quot;.equals(TRANS_TIME)">
+			#{TRANS_TIME,jdbcType=VARCHAR},
+		</if>
+		</trim>
+	</insert>
+</mapper>

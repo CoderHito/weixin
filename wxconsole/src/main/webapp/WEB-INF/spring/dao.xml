@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- JDBC模板 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"> 
+		<property name="dataSource" ref="ubaseOrmDataSource" /> </bean> -->
+
+	<!-- 基层DAO --> 
+	<bean id="baseDao" class="com.cf.base.AbstractBaseDao"
+		abstract="true">
+		<property name="jdbcTemplate" ref="myBatisSessionTemplate" />
+	</bean>
+	<!--  下面三个需要注意-->
+	 <bean id="cfResourceDao" class="com.cf.cfsecurity.dao.impl.CfResourceDao"
+		parent="baseDao" />
+
+	<bean id="cfRoleDao" class="com.cf.cfsecurity.dao.impl.CfRoleDao"
+		parent="baseDao" />
+
+	<bean id="cfUserDao" class="com.cf.cfsecurity.dao.impl.CfUserDao"
+		parent="baseDao" /> 
+
+	<!-- <bean id="BizAuth" class="com.cf.framework.util.common.impl.BizAuthImpl" 
+		parent="baseDao"/> -->
+	<bean id="CframeUtil" class="com.cf.util.common.impl.CframeUtilImpl"
+		parent="baseDao" />
+	<bean id="dataLock" class="com.cf.datalock.DataLock"
+		parent="baseDao" />
+
+	<!-- <bean id="dataLog" class="com.cf.cfasyn4j.log.DataLog"> <property name="myBatisSessionTemplate" 
+		ref="myBatisSessionTemplate" /> </bean> -->
+</beans>

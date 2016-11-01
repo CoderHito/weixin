@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE configuration 
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="callSettersOnNulls" value="true" />
+	</settings>
+	<mappers>
+		<mapper resource="com/cf/cfsecurity/dao/mapper/CfResourceMapper.xml"/>	
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/CfRoleMapper.xml"/>	
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/CfUserMapper.xml"/>
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/SysdictMapper_mysql.xml"/>
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/SysDictMapper.xml"/>
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/SysParamsMapper.xml"/>
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/SysOperateAuditsMapper.xml"/>
+	 	<mapper resource="com/cf/framework/sys/sys.xml"/>
+	 	
+		<mapper resource="auth/orm/sys/tbDict.xml"/>
+	 	<mapper resource="auth/orm/sys/tbDictTemp.xml"/>
+	</mappers> 
+</configuration>

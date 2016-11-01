@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.account.accInfo">
+	<select id="queryAccPage" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		${pageBegin}
+		select a.*,b.SUB_NAME from ACC_INFO a left join
+		ACC_SUBJECT b on a.SUBJECT = b.SUB_CODE
+		where 1=1
+		<if test="ACCNO!=null &amp;&amp; !&quot;&quot;.equals(ACCNO)">
+			and a.ACCNO like
+			CONCAT('%',CONCAT(REPLACE(#{ACCNO},'%','\%'),'%'))
+		</if>
+		<if test="SUBJECT!=null &amp;&amp; !&quot;&quot;.equals(SUBJECT)">
+			and a.SUBJECT like
+			CONCAT('%',CONCAT(REPLACE(#{SUBJECT},'%','\%'),'%'))
+		</if>
+		<if test="ACCTYPE!=null &amp;&amp; !&quot;&quot;.equals(ACCTYPE)">
+			and a.ACCTYPE=#{ACCTYPE}
+		</if>
+		<if test="CHECK_STATUS!=null &amp;&amp; !&quot;&quot;.equals(CHECK_STATUS)">
+			and a.CHECK_STATUS=#{CHECK_STATUS,jdbcType=VARCHAR}
+		</if>
+		${pageEnd}
+	</select>
+	<select id="queryAccPage_totalCount" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from ACC_INFO a left join ACC_SUBJECT b on a.SUBJECT =
+		b.SUB_CODE
+		where 1=1
+		<if test="ACCNO!=null &amp;&amp; !&quot;&quot;.equals(ACCNO)">
+			and a.ACCNO like
+			CONCAT('%',CONCAT(REPLACE(#{ACCNO},'%','\%'),'%'))
+		</if>
+		<if test="SUBJECT!=null &amp;&amp; !&quot;&quot;.equals(SUBJECT)">
+			and a.SUBJECT like
+			CONCAT('%',CONCAT(REPLACE(#{SUBJECT},'%','\%'),'%'))
+		</if>
+		<if test="ACCTYPE!=null &amp;&amp; !&quot;&quot;.equals(ACCTYPE)">
+			and a.ACCTYPE=#{ACCTYPE}
+		</if>
+		<if test="CHECK_STATUS!=null &amp;&amp; !&quot;&quot;.equals(CHECK_STATUS)">
+			and a.CHECK_STATUS=#{CHECK_STATUS,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<insert id="insertAcc" parameterType="java.util.HashMap">
+		insert into ACC_INFO
+		(ACCNO,AMT,SUBJECT,STATUS,ACCTYPE,MOD_STATUS,CHECK_STATUS,MAKER,MAKETIME)
+		values
+		(#{ACCNO},#{AMT},#{SUBJECT},#{STATUS},#{ACCTYPE},#{MOD_STATUS},#{CHECK_STATUS},#{MAKER},#{MAKETIME})
+	</insert>
+	<update id="updateAcc" parameterType="java.util.HashMap">
+		update ACC_INFO
+		set
+		<if test="STATUS!=null">
+			STATUS=#{STATUS},
+		</if>
+		<if test="SUBJECT!=null">
+			SUBJECT=#{SUBJECT},
+		</if>
+		MOD_STATUS=#{MOD_STATUS},
+		CHECK_STATUS=#{CHECK_STATUS}
+		where ACCNO=#{ACCNO}
+	</update>
+	<update id="checkAcc" parameterType="java.util.HashMap">
+		update ACC_INFO
+		set
+		CHECK_STATUS=#{CHECK_STATUS},
+		CHECKER=#{CHECKER},
+		CHECKTIME=#{CHECKTIME}
+		where ACCNO=#{ACCNO} and CHECK_STATUS = #{CHECK_STATUS_WAIT}
+	</update>
+	<delete id="delAcc" parameterType="java.lang.String">
+		delete from ACC_INFO
+		where
+		ACCNO=#{ACCNO}
+	</delete>
+	<select id="queryCountByNo" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from ACC_INFO where
+		ACCNO=#{ACCNO,jdbcType=VARCHAR}
+	</select>
+	<select id="queryAccByNo" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select * from ACC_INFO where
+		ACCNO=#{ACCNO,jdbcType=VARCHAR}
+	</select>
+	<select id="queryAccByNos" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select * from ACC_INFO where ACCNO in
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="queryAccByNoForUpdate" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select * from ACC_INFO where
+		ACCNO=#{ACCNO,jdbcType=VARCHAR} for update
+	</select>
+	<update id="updateAccAmt" parameterType="java.util.HashMap">
+		update ACC_INFO
+		set
+		AMT=#{AMT}
+		where ACCNO=#{ACCNO}
+	</update>
+</mapper>

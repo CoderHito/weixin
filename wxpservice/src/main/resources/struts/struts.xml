@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<!-- START SNIPPET: xworkSample -->
+<struts>
+	<!-- Some or all of these can be flipped to true for debugging -->
+	<constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.configuration.xml.reload" value="false" />
+	<constant name="struts.custom.i18n.resources" value="globalMessages" />
+	<constant name="struts.action.extension" value="action,do,," />
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
+	<constant name="struts.convention.result.path" value="/" />
+	<constant name="struts.serve.static" value="true" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+    <constant name="struts.multipart.maxSize" value="5500000000"/>
+	<constant name="struts.action.excludePattern" value="/ueditor/.*" />
+	<package name="pservice-default" extends="json-default" namespace="/">
+		<result-types>  
+            <result-type name="jsonDoSign" class="com.cf.common.result.JSONDoSign" />  
+        </result-types>    
+		 <interceptors>
+    		<interceptor name="ServiceIntercetpor" class="com.cf.common.interceptor.CommonLogServiceIntercetpor"></interceptor>
+    		<interceptor-stack name="ServiceInterceptorStack">
+				<interceptor-ref name="ServiceIntercetpor"/>
+    			<interceptor-ref name="basicStack"/>
+    		</interceptor-stack>
+    	</interceptors>
+    	<default-interceptor-ref name="ServiceInterceptorStack"></default-interceptor-ref>
+	</package>
+	<package name="inner-default" extends="json-default" namespace="/">
+		 <interceptors>
+    		<interceptor name="ServiceIntercetpor" class="com.cf.common.interceptor.InnerServiceIntercetpor"></interceptor>
+    		<interceptor-stack name="ServiceInterceptorStack">
+				<interceptor-ref name="ServiceIntercetpor"/>
+    			<interceptor-ref name="basicStack"/>
+    		</interceptor-stack>
+    	</interceptors>
+    	<default-interceptor-ref name="ServiceInterceptorStack"></default-interceptor-ref>
+	</package>
+	<package name="text" extends="pservice-default" namespace="/">
+		<action name="testAction" class="testAction">
+			<result type="jsonDoSign">
+					<param name="includeProperties">msg</param>
+					<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+</struts>
+
+<!-- END SNIPPET: xworkSample -->
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE configuration 
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration> 
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings> 
+	<mappers> 
+		<mapper resource="com/cf/cfsecurity/dao/mapper/CfResourceMapper.xml"/>	
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/CfRoleMapper.xml"/>	
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/CfUserMapper.xml"/>
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/SysdictMapper_mysql.xml"/>
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/SysDictMapper.xml"/>
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/SysParamsMapper.xml"/>
+	 	<mapper resource="com/cf/cfsecurity/dao/mapper/SysOperateAuditsMapper.xml"/>
+	 	
+	 	<mapper resource="auth/orm/sys/tbDict.xml"/>
+	 	<mapper resource="auth/orm/sys/tbDictTemp.xml"/>
+	 	<mapper resource="auth/orm/sys/tbUser.xml"/>
+	 	<mapper resource="auth/orm/sys/tbUserTemp.xml"/>
+	 	<mapper resource="auth/orm/sys/tbUser_mysql.xml"/>
+	 	<mapper resource="auth/orm/sys/tbRole.xml"/>
+	 	<mapper resource="auth/orm/sys/tbRoleTemp.xml"/>
+	 	<mapper resource="auth/orm/sys/tbRole_mysql.xml"/>
+		<mapper resource="auth/orm/sys/tbSysParam.xml"/>
+		<mapper resource="auth/orm/sys/tbSysParamTemp.xml"/>
+        <mapper resource="auth/orm/sys/tbLoginAudits.xml"/>
+        <mapper resource="auth/orm/sys/tbLoginAudits_mysql.xml"/>
+        <mapper resource="auth/orm/sys/tbOperateAudits.xml"/>
+        <mapper resource="auth/orm/sys/tbOperateAudits_mysql.xml"/>
+	</mappers>
+</configuration>

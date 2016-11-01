@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.report">
+
+	<select id="queryTransDetailPage" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		${pageBegin}
+		select
+		b.ORDERNO,b.CARDNO,b.TRANS_DATE,b.TRANS_TIME,b.AMOUNT,b.CONSUME_AMT,a.AMT,d.AGENT_NAME
+		from biz_trans_detl b ,acc_info a ,card_acc_map c,CARD_AGENT
+		d,CARD_INFO e
+		where 1=1
+		<if test="ORDERNO!=null &amp;&amp; !&quot;&quot;.equals(ORDERNO)">
+			and b.ORDERNO = #{ORDERNO}
+		</if>
+		<if test="CARD_NO!=null &amp;&amp; !&quot;&quot;.equals(CARD_NO)">
+			<![CDATA[and SUBSTRING(b.CARDNO,1,LENGTH(b.CARDNO)-1)>=SUBSTRING(#{CARD_NO},1,LENGTH(#{CARD_NO})-1)]]>
+		</if>
+		<if test="CARD_NO_END!=null &amp;&amp; !&quot;&quot;.equals(CARD_NO_END)">
+			<![CDATA[and SUBSTRING(b.CARDNO,1,LENGTH(b.CARDNO)-1)<=SUBSTRING(#{CARD_NO_END},1,LENGTH(#{CARD_NO_END})-1)]]>
+		</if>
+		<if test="AGENT_ID!=null &amp;&amp; !&quot;&quot;.equals(AGENT_ID)">
+			and d.AGENT_ID = #{AGENT_ID}
+		</if>
+		<if test="WORK_DATE!=null &amp;&amp; !&quot;&quot;.equals(WORK_DATE)">
+			and b.TRANS_DATE = #{WORK_DATE}
+		</if>
+		and c.CARDNO=b.CARDNO and c.ACCNO=a.ACCNO and b.TRANS_TYPE IN
+		('0003','0005','0009')
+		and b.CARDNO=e.CARDNO
+		and d.AGENT_ID=e.AGENT_ID
+		order by b.TRANS_DATE
+		${pageEnd}
+	</select>
+
+	<select id="queryTransDetailPage_totalCount" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from biz_trans_detl b ,acc_info a ,card_acc_map c
+		,CARD_AGENT d,CARD_INFO e
+		where 1=1
+		<if test="ORDERNO!=null &amp;&amp; !&quot;&quot;.equals(ORDERNO)">
+			and b.ORDERNO = #{ORDERNO}
+		</if>
+		<if test="CARD_NO!=null &amp;&amp; !&quot;&quot;.equals(CARD_NO)">
+			<![CDATA[and SUBSTRING(b.CARDNO,1,LENGTH(b.CARDNO)-1)>=SUBSTRING(#{CARD_NO},1,LENGTH(#{CARD_NO})-1)]]>
+		</if>
+		<if test="CARD_NO_END!=null &amp;&amp; !&quot;&quot;.equals(CARD_NO_END)">
+			<![CDATA[and SUBSTRING(b.CARDNO,1,LENGTH(b.CARDNO)-1)<=SUBSTRING(#{CARD_NO_END},1,LENGTH(#{CARD_NO_END})-1)]]>
+		</if>
+		<if test="AGENT_ID!=null &amp;&amp; !&quot;&quot;.equals(AGENT_ID)">
+			and d.AGENT_ID = #{AGENT_ID}
+		</if>
+		<if test="WORK_DATE!=null &amp;&amp; !&quot;&quot;.equals(WORK_DATE)">
+			and b.TRANS_DATE = #{WORK_DATE}
+		</if>
+		and c.CARDNO=b.CARDNO and c.ACCNO=a.ACCNO and b.TRANS_TYPE IN
+		('0003','0005','0009')
+		and b.CARDNO=e.CARDNO
+		and d.AGENT_ID=e.AGENT_ID
+	</select>
+
+	<select id="queryTransDetail" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select
+		b.ORDERNO,b.CARDNO,b.TRANS_DATE,b.TRANS_TIME,b.AMOUNT,b.CONSUME_AMT,a.AMT,d.AGENT_NAME
+		from biz_trans_detl b ,acc_info a ,card_acc_map c,CARD_AGENT
+		d,CARD_INFO e
+		where 1=1
+		<if test="ORDERNO!=null &amp;&amp; !&quot;&quot;.equals(ORDERNO)">
+			and b.ORDERNO = #{ORDERNO}
+		</if>
+		<if test="CARD_NO!=null &amp;&amp; !&quot;&quot;.equals(CARD_NO)">
+			<![CDATA[and SUBSTRING(b.CARDNO,1,LENGTH(b.CARDNO)-1)>=SUBSTRING(#{CARD_NO},1,LENGTH(#{CARD_NO})-1)]]>
+		</if>
+		<if test="CARD_NO_END!=null &amp;&amp; !&quot;&quot;.equals(CARD_NO_END)">
+			<![CDATA[and SUBSTRING(b.CARDNO,1,LENGTH(b.CARDNO)-1)<=SUBSTRING(#{CARD_NO_END},1,LENGTH(#{CARD_NO_END})-1)]]>
+		</if>
+		<if test="AGENT_ID!=null &amp;&amp; !&quot;&quot;.equals(AGENT_ID)">
+			and d.AGENT_ID = #{AGENT_ID}
+		</if>
+		<if test="WORK_DATE!=null &amp;&amp; !&quot;&quot;.equals(WORK_DATE)">
+			and b.TRANS_DATE = #{WORK_DATE}
+		</if>
+		and c.CARDNO=b.CARDNO and c.ACCNO=a.ACCNO and b.TRANS_TYPE IN
+		('0003','0005','0009')
+		and b.CARDNO=e.CARDNO
+		and d.AGENT_ID=e.AGENT_ID
+		order by b.TRANS_DATE
+	</select>
+
+	<select id="queryOrderBalanceSummaryPage" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		${pageBegin}
+		SELECT e.ORDER_NO,SUBSTRING(b.CHECKTIME FROM 1
+		FOR 8) as CHECKTIME,b.AMOUNT, SUM(f.AMT) AS BALANCE FROM
+		(SELECT b2.ORDER_NO,b2.CARDNO FROM biz_order_dtl b2,biz_order b1 WHERE
+		b2.ORDER_NO=b1.ORDER_NO ) e,
+		(SELECT a.ACCNO ,b.CARDNO,a.AMT FROM acc_info a,card_acc_map c,biz_order_dtl
+		b WHERE c.ACCNO=a.ACCNO AND c.CARDNO=b.CARDNO) f,
+		biz_order b
+		WHERE e.CARDNO=f.CARDNO and e.ORDER_NO=b.ORDER_NO
+		and
+		str_to_date(SUBSTRING(b.CHECKTIME FROM 1 FOR 8),'%Y%m%d') &gt;=
+		str_to_date(#{BEGINTIME},'%Y%m%d')
+		and
+		str_to_date(SUBSTRING(b.CHECKTIME FROM 1 FOR 8),'%Y%m%d') &lt;=
+		str_to_date(#{ENDTIME},'%Y%m%d')
+		GROUP BY e.ORDER_NO
+		${pageEnd}
+	</select>
+	<select id="queryOrderBalanceSummaryPage_totalCount"
+		parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM
+		biz_order
+		WHERE
+		str_to_date(SUBSTRING(CHECKTIME FROM 1 FOR 8),'%Y%m%d') &gt;=
+		str_to_date(#{BEGINTIME},'%Y%m%d')
+		and str_to_date(SUBSTRING(CHECKTIME
+		FROM 1 FOR 8),'%Y%m%d') &lt;= str_to_date(#{ENDTIME},'%Y%m%d')
+	</select>
+
+	<select id="queryOrderBalanceSummary" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT e.ORDER_NO,SUBSTRING(b.CHECKTIME FROM 1 FOR 8) as
+		CHECKTIME,b.AMOUNT, SUM(f.AMT) AS BALANCE FROM
+		(SELECT b2.ORDER_NO,b2.CARDNO FROM biz_order_dtl b2,biz_order b1 WHERE
+		b2.ORDER_NO=b1.ORDER_NO ) e,
+		(SELECT a.ACCNO ,b.CARDNO,a.AMT FROM acc_info a,card_acc_map c,biz_order_dtl
+		b WHERE c.ACCNO=a.ACCNO AND c.CARDNO=b.CARDNO) f,
+		biz_order b
+		WHERE e.CARDNO=f.CARDNO and e.ORDER_NO=b.ORDER_NO
+		and
+		str_to_date(SUBSTRING(b.CHECKTIME FROM 1 FOR 8),'%Y%m%d') &gt;=
+		str_to_date(#{BEGINTIME},'%Y%m%d')
+		and
+		str_to_date(SUBSTRING(b.CHECKTIME FROM 1 FOR 8),'%Y%m%d') &lt;=
+		str_to_date(#{ENDTIME},'%Y%m%d')
+		GROUP BY e.ORDER_NO
+	</select>
+
+	<select id="queryTransDailyPage" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		${pageBegin}
+		SELECT
+		d.FILE_NAME,d.DATE,d.FILE_TYPE,d.PATH,a.CLEARING_STATUS FROM
+		dailytrans_report_log d
+		left join biz_trans_report_temp a on
+		a.TRANS_DATE=d.DATE
+		where 1=1
+		<if test="DATE!=null &amp;&amp; !&quot;&quot;.equals(DATE)">
+			and d.DATE = #{DATE}
+		</if>
+		${pageEnd}
+	</select>
+
+	<select id="queryTransDailyPage_totalCount" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM dailytrans_report_log d
+		where 1=1
+		<if test="DATE!=null &amp;&amp; !&quot;&quot;.equals(DATE)">
+			and d.DATE = #{DATE}
+		</if>
+	</select>
+
+	<select id="selectConsumeAmount" parameterType="java.util.HashMap"
+		resultType="java.lang.String">
+		SELECT b.CONSUME_AMOUNT FROM biz_trans_report_temp b WHERE
+		b.TRANS_DATE=#{DATE} and b.CLEARING_STATUS=#{CLEARING_STATUS}
+	</select>
+
+	<update id="updateSideAccInfo" parameterType="java.util.HashMap">
+		update acc_info
+		set AMT=cast(AMT as SIGNED INTEGER)-cast(#{CONSUME_AMOUNT} as SIGNED
+		INTEGER)
+		where ACCTYPE = #{ACCTYPE}
+	</update>
+
+	<select id="updateClearingStatus" parameterType="java.util.HashMap"
+		resultType="java.lang.String">
+		update biz_trans_report_temp
+		set
+		CLEARING_STATUS=#{CLEARING_STATUS}
+		WHERE TRANS_DATE=#{DATE}
+	</select>
+
+	<select id="queryConsumeDetailPage" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		${pageBegin}
+		select
+		b.*,c.AGENT_NAME
+		from consume_report b,card_info a,card_agent c
+		where 1=1
+		<if test="CARDNO!=null &amp;&amp; !&quot;&quot;.equals(CARDNO)">
+			and b.CARDNO = #{CARDNO}
+		</if>
+		<if test="CONSUME_SEQ!=null &amp;&amp; !&quot;&quot;.equals(CONSUME_SEQ)">
+			and b.ZYT_CONSUME_SEQ = #{CONSUME_SEQ}
+		</if>
+		<if test="RECHARGE_SEQ!=null &amp;&amp; !&quot;&quot;.equals(RECHARGE_SEQ)">
+			and b.RECHARGE_SEQ = #{RECHARGE_SEQ}
+		</if>
+		<if test="AGENT_ID!=null &amp;&amp; !&quot;&quot;.equals(AGENT_ID)">
+			and a.AGENT_ID = #{AGENT_ID}
+		</if>
+		and str_to_date(SUBSTRING(b.TRANS_DATE FROM 1 FOR 8),'%Y%m%d') &gt;=
+		str_to_date(#{BEGINTIME},'%Y%m%d')
+		and
+		str_to_date(SUBSTRING(b.TRANS_DATE FROM 1 FOR 8),'%Y%m%d') &lt;=
+		str_to_date(#{ENDTIME},'%Y%m%d')
+		and a.CARDNO=b.CARDNO AND
+		a.AGENT_ID=c.AGENT_ID
+		order by b.TRANS_DATE
+	</select>
+
+	<select id="queryConsumeDetailPage_totalCount" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from consume_report b,card_info a,card_agent c
+		where
+		1=1
+		<if test="CARDNO!=null &amp;&amp; !&quot;&quot;.equals(CARDNO)">
+			and b.CARDNO = #{CARDNO}
+		</if>
+		<if test="CONSUME_SEQ!=null &amp;&amp; !&quot;&quot;.equals(CONSUME_SEQ)">
+			and b.ZYT_CONSUME_SEQ = #{CONSUME_SEQ}
+		</if>
+		<if test="RECHARGE_SEQ!=null &amp;&amp; !&quot;&quot;.equals(RECHARGE_SEQ)">
+			and b.RECHARGE_SEQ = #{RECHARGE_SEQ}
+		</if>
+		<if test="AGENT_ID!=null &amp;&amp; !&quot;&quot;.equals(AGENT_ID)">
+			and a.AGENT_ID = #{AGENT_ID}
+		</if>
+		and str_to_date(SUBSTRING(b.TRANS_DATE FROM 1 FOR 8),'%Y%m%d') &gt;=
+		str_to_date(#{BEGINTIME},'%Y%m%d')
+		and
+		str_to_date(SUBSTRING(b.TRANS_DATE FROM 1 FOR 8),'%Y%m%d') &lt;=
+		str_to_date(#{ENDTIME},'%Y%m%d')
+		and a.CARDNO=b.CARDNO AND
+		a.AGENT_ID=c.AGENT_ID
+	</select>
+
+
+	<select id="queryConsumeDetail" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select
+		b.*,c.AGENT_NAME
+		from consume_report b,card_info a,card_agent c
+		where 1=1
+		<if test="CARDNO!=null &amp;&amp; !&quot;&quot;.equals(CARDNO)">
+			and b.CARDNO = #{CARDNO}
+		</if>
+		<if test="CONSUME_SEQ!=null &amp;&amp; !&quot;&quot;.equals(CONSUME_SEQ)">
+			and b.ZYT_CONSUME_SEQ = #{CONSUME_SEQ}
+		</if>
+		<if test="RECHARGE_SEQ!=null &amp;&amp; !&quot;&quot;.equals(RECHARGE_SEQ)">
+			and b.RECHARGE_SEQ = #{RECHARGE_SEQ}
+		</if>
+		<if test="AGENT_ID!=null &amp;&amp; !&quot;&quot;.equals(AGENT_ID)">
+			and a.AGENT_ID = #{AGENT_ID}
+		</if>
+		and str_to_date(SUBSTRING(b.TRANS_DATE FROM 1 FOR 8),'%Y%m%d') &gt;=
+		str_to_date(#{BEGINTIME},'%Y%m%d')
+		and
+		str_to_date(SUBSTRING(b.TRANS_DATE FROM 1 FOR 8),'%Y%m%d') &lt;=
+		str_to_date(#{ENDTIME},'%Y%m%d')
+		and a.CARDNO=b.CARDNO AND
+		a.AGENT_ID=c.AGENT_ID
+		order by b.TRANS_DATE
+	</select>
+
+</mapper>

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Implementation-Vendor: ￤ﾸﾊ￦ﾵﾷ￩ﾅﾷ￦ﾜﾍ￤﾿ﾡ￦ﾁﾯ￧ﾧﾑ￦ﾊﾀ￦ﾜﾉ￩ﾙﾐ￥ﾅﾬ￥ﾏﾸ
+Implementation-Title: wxibatis
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.cf.wx
+Specification-Vendor: ￤ﾸﾊ￦ﾵﾷ￩ﾅﾷ￦ﾜﾍ￤﾿ﾡ￦ﾁﾯ￧ﾧﾑ￦ﾊﾀ￦ﾜﾉ￩ﾙﾐ￥ﾅﾬ￥ﾏﾸ
+Build-Jdk: 1.7.0_75
+Built-By: hito
+Created-By: Maven Integration for Eclipse
+Specification-Title: wxibatis
+Specification-Version: 0.0.1-SNAPSHOT
+

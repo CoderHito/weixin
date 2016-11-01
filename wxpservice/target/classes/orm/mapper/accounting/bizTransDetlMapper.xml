@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.account.transDetl">
+	<delete id="delTransDetl" parameterType="java.util.HashMap">
+		delete from biz_trans_detl
+		WHERE	
+			TRANS_SEQ = #{TRANS_SEQ,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insertTransDetl" parameterType="java.util.HashMap">
+		insert into biz_trans_detl
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="TRANS_DATE!=null &amp;&amp; !&quot;&quot;.equals(TRANS_DATE)">
+			TRANS_DATE,
+		</if>
+		<if test="TRANS_TIME!=null &amp;&amp; !&quot;&quot;.equals(TRANS_TIME)">
+			TRANS_TIME,
+		</if>
+		<if test="TRANS_SEQ!=null &amp;&amp; !&quot;&quot;.equals(TRANS_SEQ)">
+			TRANS_SEQ,
+		</if>
+		<if test="TRANS_TYPE!=null &amp;&amp; !&quot;&quot;.equals(TRANS_TYPE)">
+			TRANS_TYPE,
+		</if>
+		<if test="CARDNO!=null &amp;&amp; !&quot;&quot;.equals(CARDNO)">
+			CARDNO,
+		</if>
+		<if test="AMOUNT!=null &amp;&amp; !&quot;&quot;.equals(AMOUNT)">
+			AMOUNT,
+		</if>
+		<if test="ORDERNO!=null &amp;&amp; !&quot;&quot;.equals(ORDERNO)">
+			ORDERNO,
+		</if>
+		<if test="ORDERDESC!=null &amp;&amp; !&quot;&quot;.equals(ORDERDESC)">
+			ORDERDESC,
+		</if>
+		<if test="OMERCHANTSEQ!=null &amp;&amp; !&quot;&quot;.equals(OMERCHANTSEQ)">
+			OMERCHANTSEQ,
+		</if>
+		<if test="MERCHANT!=null &amp;&amp; !&quot;&quot;.equals(MERCHANT)">
+			MERCHANT,
+		</if>
+		<if test="MOD_STATUS!=null &amp;&amp; !&quot;&quot;.equals(MOD_STATUS)">
+			MOD_STATUS,
+		</if>
+		<if test="MAKER!=null &amp;&amp; !&quot;&quot;.equals(MAKER)">
+			MAKER,
+		</if>
+		<if test="MAKETIME!=null &amp;&amp; !&quot;&quot;.equals(MAKETIME)">
+			MAKETIME,
+		</if>
+		<if test="CONSUME_AMT!=null &amp;&amp; !&quot;&quot;.equals(CONSUME_AMT)">
+			CONSUME_AMT,
+		</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="TRANS_DATE!=null &amp;&amp; !&quot;&quot;.equals(TRANS_DATE)">
+			#{TRANS_DATE,jdbcType=VARCHAR},
+		</if>
+		<if test="TRANS_TIME!=null &amp;&amp; !&quot;&quot;.equals(TRANS_TIME)">
+			#{TRANS_TIME,jdbcType=VARCHAR},
+		</if>
+		<if test="TRANS_SEQ!=null &amp;&amp; !&quot;&quot;.equals(TRANS_SEQ)">
+			#{TRANS_SEQ,jdbcType=VARCHAR},
+		</if>
+		<if test="TRANS_TYPE!=null &amp;&amp; !&quot;&quot;.equals(TRANS_TYPE)">
+			#{TRANS_TYPE,jdbcType=VARCHAR},
+		</if>
+		<if test="CARDNO!=null &amp;&amp; !&quot;&quot;.equals(CARDNO)">
+			#{CARDNO,jdbcType=VARCHAR},
+		</if>
+		<if test="AMOUNT!=null &amp;&amp; !&quot;&quot;.equals(AMOUNT)">
+			#{AMOUNT,jdbcType=VARCHAR},
+		</if>
+		<if test="ORDERNO!=null &amp;&amp; !&quot;&quot;.equals(ORDERNO)">
+			#{ORDERNO,jdbcType=VARCHAR},
+		</if>
+		<if test="ORDERDESC!=null &amp;&amp; !&quot;&quot;.equals(ORDERDESC)">
+			#{ORDERDESC,jdbcType=VARCHAR},
+		</if>
+		<if test="OMERCHANTSEQ!=null &amp;&amp; !&quot;&quot;.equals(OMERCHANTSEQ)">
+			#{OMERCHANTSEQ,jdbcType=VARCHAR},
+		</if>
+		<if test="MERCHANT!=null &amp;&amp; !&quot;&quot;.equals(MERCHANT)">
+			#{MERCHANT,jdbcType=VARCHAR},
+		</if>
+		<if test="MOD_STATUS!=null &amp;&amp; !&quot;&quot;.equals(MOD_STATUS)">
+			#{MOD_STATUS,jdbcType=VARCHAR},
+		</if>
+		<if test="MAKER!=null &amp;&amp; !&quot;&quot;.equals(MAKER)">
+			#{MAKER,jdbcType=VARCHAR},
+		</if>
+		<if test="MAKETIME!=null &amp;&amp; !&quot;&quot;.equals(MAKETIME)">
+			#{MAKETIME,jdbcType=VARCHAR},
+		</if>
+		<if test="CONSUME_AMT!=null &amp;&amp; !&quot;&quot;.equals(CONSUME_AMT)">
+			#{CONSUME_AMT,jdbcType=VARCHAR},
+		</if>
+		</trim>
+	</insert>
+</mapper>

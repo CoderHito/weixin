@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.mapper.DataLogMapper">
+
+	<insert id="logDataChange" parameterType="java.lang.String">
+		insert into
+		TB_SYSDATA_LOG(ID,IP,SESSION_ID,REQ_URL,OLD_VALUE,NEW_VALUE,OPERATION,
+		ACTION_NAME,USER_ID,CREATED)
+		values(#{ID,jdbcType=VARCHAR},
+		#{IP,jdbcType=VARCHAR},
+		#{SESSION_ID,jdbcType=VARCHAR},
+		#{REQ_URL,jdbcType=VARCHAR},
+		#{oldValue,jdbcType=VARCHAR},
+		#{newValue,jdbcType=VARCHAR},
+		#{OPERATION,jdbcType=VARCHAR},
+		#{ACTION_NAME,jdbcType=VARCHAR},
+		#{USER_ID,jdbcType=VARCHAR},
+		#{CREATED,jdbcType=VARCHAR}
+		)
+	</insert>
+
+</mapper>

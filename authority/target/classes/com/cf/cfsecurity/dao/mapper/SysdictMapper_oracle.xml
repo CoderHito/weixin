@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cf.dao.mapper.SysDictMapper" >
+	<select id="selectDictList" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT DICT_VALUE,CONCAT(CONCAT(DICT_VALUE,'-'),DICT_NAME)  as DICT_NAME,GROUP_ID,GROUP_NAME
+		  FROM TB_DICT 
+		  <where> 
+			1=1 
+		</where> 
+	</select>
+</mapper>

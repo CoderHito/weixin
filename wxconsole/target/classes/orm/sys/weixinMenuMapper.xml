@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.sys.weixinMenu">
+
+	<select id="queryWeiXinMenuPage" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		${pageBegin}
+		select * from weixin_menu where 1=1
+		<if test="TYPE!=null &amp;&amp; !&quot;&quot;.equals(TYPE)">
+			and TYPE = #{TYPE}
+		</if>
+		order by sort
+		${pageEnd}
+	</select>
+
+	<select id="queryWeiXinMenuPage_totalCount" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from weixin_menu where 1=1
+		<if test="TYPE!=null &amp;&amp; !&quot;&quot;.equals(TYPE)">
+			and TYPE = #{TYPE}
+		</if>
+	</select>
+
+	<select id="queryOneMenu" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select * from weixin_menu where level='0' order by sort
+	</select>
+
+	<select id="selectWeixinMenu1" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from weixin_menu where level='0'
+		and has_sub_button='0'
+	</select>
+
+	<select id="selectWeixinMenu2" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from (select count(parent_id) from weixin_menu where
+		parent_id in (select menu_id from weixin_menu where level='0'
+		and has_sub_button='0') GROUP BY parent_id) as a
+	</select>
+
+	<select id="queWeiXinMenu" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select * from weixin_menu where level='0' and
+		has_sub_button='0'
+	</select>
+
+	<select id="queryTwoMenu" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select * from weixin_menu where
+		parent_id=#{MENU,jdbcType=VARCHAR}
+	</select>
+
+	<select id="queryParentMenu" parameterType="java.util.HashMap"
+		resultType="java.lang.Integer">
+		select count(*) from weixin_menu where parent_id =
+		#{MENU_ID,jdbcType=VARCHAR}
+	</select>
+
+	<select id="querySubMenu" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select * from weixin_menu where
+		parent_id=#{menu_id,jdbcType=VARCHAR}
+	</select>
+
+	<select id="queryMenuByID" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select * from weixin_menu where MENU_ID
+	</select>
+
+	<insert id="addWeiXinMenu" parameterType="java.util.HashMap">
+		insert into weixin_menu
+		(TYPE,MENU_NAME,MENU_KEY,URL,MEDIA_ID,LEVEL,parent_id,has_sub_button,sort)
+		values (#{TYPE, jdbcType=VARCHAR},#{MENU_NAME,
+		jdbcType=VARCHAR},#{MENU_KEY, jdbcType=VARCHAR},#{URL,
+		jdbcType=VARCHAR},#{MEDIA_ID, jdbcType=VARCHAR}
+		,#{MENU_LEVEL, jdbcType=VARCHAR},#{MENU, jdbcType=VARCHAR},#{has_sub_button,
+		jdbcType=VARCHAR},#{sort, jdbcType=VARCHAR})
+	</insert>
+
+	<delete id="delWeiXinMenu" parameterType="java.util.HashMap">
+		delete from weixin_menu
+		where MENU_ID=#{MENU_ID,jdbcType=VARCHAR}
+	</delete>
+
+	<update id="updateWeiXinMenu" parameterType="java.util.HashMap">
+		update weixin_menu
+		set has_sub_button=#{has_sub_button,jdbcType=VARCHAR},
+		TYPE=#{TYPE,jdbcType=VARCHAR},
+		MENU_NAME=#{MENU_NAME,jdbcType=VARCHAR},
+		URL=#{URL,jdbcType=VARCHAR},
+		MEDIA_ID=#{MEDIA_ID,jdbcType=VARCHAR},
+		MENU_KEY=#{MENU_KEY,jdbcType=VARCHAR},
+		parent_id=#{MENU,jdbcType=VARCHAR},
+		sort=#{sort,jdbcType=VARCHAR}
+		where MENU_ID=#{MENU_ID,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

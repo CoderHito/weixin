@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <context id="cf_role" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.184.3:3306/aml" userId="test" password="test" />
+    <javaModelGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <sqlMapGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <table schema="test" tableName="cf_role" >
+      <!-- 
+      	<columnOverride column="???" property="???" />
+      	 -->
+    </table>
+  </context>
+  <context id="cf_user" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.184.3:3306/aml" userId="test" password="test" />
+    <javaModelGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <sqlMapGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <table schema="test" tableName="cf_user" >
+      <!-- 
+      	<columnOverride column="???" property="???" />
+      	 -->
+    </table>
+  </context>
+  
+    <context id="cf_resource" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.184.3:3306/aml" userId="test" password="test" />
+    <javaModelGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <sqlMapGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <table schema="test" tableName="cf_resource" >
+      <!-- 
+      	<columnOverride column="???" property="???" />
+      	 -->
+    </table>
+  </context>
+  <context id="cf_role_resource" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.184.3:3306/aml" userId="test" password="test" />
+    <javaModelGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <sqlMapGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <table schema="test" tableName="cf_role_resource" >
+      <!-- 
+      	<columnOverride column="???" property="???" />
+      	 -->
+    </table>
+   </context>
+   <context id="cf_user_role" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.184.3:3306/aml" userId="test" password="test" />
+    <javaModelGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <sqlMapGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <table schema="test" tableName="cf_user_role" >
+      <!-- 
+      	<columnOverride column="???" property="???" />
+      	 -->
+    </table>
+  </context>
+  <context id="sys_dict" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.184.3:3306/aml" userId="test" password="test" />
+    <javaModelGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <sqlMapGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <table schema="test" tableName="sys_dict" >
+      <!-- 
+      	<columnOverride column="???" property="???" />
+      	 -->
+    </table>
+  </context>
+  <context id="SYS_LOGIN_AUDITS" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.184.3:3306/aml" userId="test" password="test" />
+    <javaModelGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <sqlMapGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <table schema="test" tableName="SYS_LOGIN_AUDITS" >
+      <!-- 
+      	<columnOverride column="???" property="???" />
+      	 -->
+    </table>
+  </context>
+  <context id="SYS_OPERATE_AUDITS" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.184.3:3306/aml" userId="test" password="test" />
+    <javaModelGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <sqlMapGenerator targetPackage="cf.dao.tmp" targetProject="CFrame" />
+    <table schema="test" tableName="SYS_OPERATE_AUDITS" >
+      <!-- 
+      	<columnOverride column="???" property="???" />
+      	 -->
+    </table>
+  </context>
+</generatorConfiguration>

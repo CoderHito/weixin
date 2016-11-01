@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orm.common.dataLock" >
+	<select id="queryLock" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from ctl_datalock
+		  <where> 
+			1=1 
+			<if test="KEY_CODE!=null">
+			and KEY_CODE=#{KEY_CODE,jdbcType=VARCHAR}
+			</if>
+		</where> 
+	</select>
+	
+	<insert id="lockData" parameterType="java.lang.String">
+		insert into ctl_datalock(WORK_DATE,KEY_CODE,LOCK_TYPE,LOCKER,LOCK_TIME)
+			values(#{WORK_DATE,jdbcType=VARCHAR},
+				#{KEY_CODE,jdbcType=VARCHAR},
+				#{LOCK_TYPE,jdbcType=VARCHAR},
+				#{LOCKER,jdbcType=VARCHAR},
+				#{LOCK_TIME,jdbcType=VARCHAR}
+			)
+	</insert>
+	
+	<delete id="unLockData" parameterType="java.lang.String">
+		delete from ctl_datalock
+		  <where> 
+			1=1 
+			<if test="KEY_CODE!=null">
+			and KEY_CODE=#{KEY_CODE,jdbcType=VARCHAR}
+			</if>
+			<if test="LOCKER!=null">
+			and LOCKER=#{LOCKER,jdbcType=VARCHAR}
+			</if>
+		</where> 
+	</delete>
+</mapper>

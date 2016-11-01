@@ -1,0 +1,178 @@
+@CHARSET "UTF-8";
+
+#treeview-1017 .x-grid-tree-node-expanded .x-tree-icon-parent {
+  	background-image: url(../image/cframe/tree_departExpanded.png) !important;
+}
+
+#treeview-1017 .x-tree-icon{
+	background-image: url(../image/cframe/tree_departCollapsed.png) !important;
+}
+
+#treeview-1017 .x-tree-icon-leaf{
+	background-image: url(../image/cframe/tree_departExpanded.png) !important;
+}
+
+#departForm .x-tree-icon{
+	background-image: url(../image/cframe/tree_departCollapsed.png) !important;
+}
+
+#departForm .x-tree-icon-parent{
+	background-image: url(../image/cframe/tree_departCollapsed.png) !important;
+}
+
+#departForm .x-grid-tree-node-expanded .x-tree-icon-parent {
+  	background-image: url(../image/cframe/tree_departExpanded.png) !important;
+}
+
+#departForm .x-tree-icon-leaf{
+	background-image: url(../image/cframe/tree_departExpanded.png) !important;
+}
+
+#treeview-1012 .x-tree-icon{
+	background-image: url(../image/cframe/tree_menuCollapsed.png) !important;
+}
+
+#treeview-1012 .x-grid-tree-node-expanded .x-tree-icon-parent{
+  	background-image: url(../image/cframe/tree_menuExpanded.png) !important;
+}
+
+#treeview-1012 .x-tree-icon-leaf{
+	background-image: url(../image/cframe/tree_menu.png) !important;
+}
+
+.tbar_buildingIcon{
+	background-image: url(../image/cframe/tbar_building.png) !important;
+}
+
+.tbar_queryIcon {
+    background-image:url(../image/cframe/tbar_query.png) !important;
+ }
+ .tbar_pwdResetIcon{
+ 	background-image:url(../image/cframe/tbar_pwdReset.png) !important;
+ }
+ .tbar_userActivationIcon{
+ 	background-image:url(../image/cframe/tbar_userActivation.png) !important;
+ }
+ .tbar_logoutIcon{
+ background-image:url(../image/cframe/tbar_logout.png) !important;
+ }
+.tbar_addIcon {
+    background-image:url(../image/cframe/tbar_add.png) !important;
+ }
+ 
+.tbar_modIcon {
+    background-image:url(../image/cframe/tbar_mod.png) !important;
+ }
+ 
+.tbar_delIcon {
+    background-image:url(../image/cframe/tbar_del.png) !important;
+ }
+ 
+.tbar_saveIcon {
+    background-image:url(../image/cframe/tbar_save.png) !important;margin:2px 0 0 5px;
+ }
+ 
+.tbar_cancelIcon {
+    background-image:url(../image/cframe/tbar_cancel.png) !important;
+ }
+ 
+.tbar_synIcon {
+    background-image:url(../image/cframe/tbar_syn.png) !important;
+ }
+ 
+.tbar_printIcon {
+    background-image:url(../image/cframe/tbar_print.png) !important;
+ }
+ 
+.tbar_passwdIcon {
+    background-image:url(../image/cframe/tbar_changepwd.png) !important;margin:0 5px 0 0;
+ }
+ 
+.tbar_confirmIcon {
+    background-image:url(../image/cframe/tbar_confirm.png) !important;
+ }
+ 
+.tbar_helpIcon {
+    background-image:url(../image/cframe/tbar_help.png) !important;margin:2px 5px 0 0;
+ }
+ 
+.tbar_importIcon {
+    background-image:url(../image/cframe/tbar_import.png) !important;
+ } 
+ 
+.tbar_reimportIcon {
+    background-image:url(../image/cframe/tbar_reimport.png) !important;
+ }  
+ 
+.fileupload_add {
+	background-image: url(../image/cframe/fileupload_add.png) !important;
+}
+
+.fileupload_delete {
+	background-image: url(../image/cframe/fileupload_delete.png) !important;
+}
+
+.fileupload_up {
+	background-image: url(../image/cframe/fileupload_up.png) !important;
+}
+
+.fileupload_down {
+	background-image: url(../image/cframe/fileupload_down.png) !important;
+}
+
+.fileupload_trash {
+	background-image: url(../image/cframe/fileupload_trash.png) !important;
+}
+
+.fileupload_cancel {
+	background-image: url(../image/cframe/fileupload_cancel.png) !important;
+}
+ 
+.title_banner {
+  
+  background:url(../image/cframe/logo.gif) no-repeat left 0px;
+  position:absolute; 
+}
+.infeed_title_banner {
+  background:url(../image/cframe/logo1.gif) no-repeat left 0px;
+  position:absolute; 
+}
+.tbar_buildingIcon1{
+  background:url(../image/cframe/1.png) no-repeat !important;
+}
+.tbar_buildingIcon2{
+  background:url(../image/cframe/2.png) no-repeat !important;
+}
+.x-btn-button_arrow_down{
+  background-image:url(../image/cframe/down.png);
+  background-repeat:no-repeat;
+  background-position:right;
+  padding-right: 12px;
+}
+.x-btn-button_arrow_right{
+  background-image:url(../image/cframe/down.png);
+  background-repeat:no-repeat;
+  background-position:right;
+  padding-right: 12px;
+}
+.menu_span_leaf{
+	font-family:'微软雅黑';
+	font-size: 13px;
+	background-image:url(../image/cframe/right.png);
+  	background-repeat:no-repeat;
+  	background-position:right;
+  	padding-right: 14px;
+  	color: #808080;
+}
+.toolbar_title {
+	background-image: url(../image/cframe/tree_menu.png) !important;
+}
+.toolbar_menusecond {
+	background-image: url(../image/cframe/tree_menuCollapsed.png) !important;
+}
+.toolbar_menu {
+	background-image: url(../image/cframe/tree_menuExpanded.png) !important;
+}
+.tbar_detailIcon {
+    background-image:url(../image/cframe/icon.png) !important;
+ }  
